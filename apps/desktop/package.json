@@ -1,0 +1,37 @@
+{
+  "name": "desktop",
+  "version": "0.1.0",
+  "description": "AI Desktop Automation - Desktop App",
+  "main": "dist/main/main.js",
+  "type": "module",
+  "scripts": {
+    "build": "npm run build:main && npm run build:preload && npm run build:renderer",
+    "build:main": "tsc -p tsconfig.main.json",
+    "build:preload": "tsc -p tsconfig.preload.json && cp dist/main/preload.js dist/main/preload.cjs",
+    "build:renderer": "vite build",
+    "dev": "concurrently \"npm run dev:main\" \"npm run dev:renderer\" \"wait-on http://localhost:5173 && sleep 2 && electron dist/main/main.js\"",
+    "dev:main": "concurrently \"tsc -p tsconfig.main.json --watch\" \"tsc -p tsconfig.preload.json --watch\" \"nodemon --watch dist/main/preload.js --exec 'cp dist/main/preload.js dist/main/preload.cjs'\"",
+    "dev:renderer": "vite",
+    "typecheck": "tsc --noEmit && tsc -p tsconfig.main.json --noEmit",
+    "test": "vitest"
+  },
+  "dependencies": {
+    "@automator/common": "workspace:*",
+    "electron-updater": "^6.1.4"
+  },
+  "devDependencies": {
+    "@types/node": "^20.8.0",
+    "@types/react": "^18.2.25",
+    "@types/react-dom": "^18.2.10",
+    "@vitejs/plugin-react": "^4.1.0",
+    "concurrently": "^8.2.1",
+    "electron": "^37.2.6",
+    "nodemon": "^3.1.10",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "typescript": "^5.2.2",
+    "vite": "^4.4.9",
+    "vitest": "^0.34.6",
+    "wait-on": "^7.0.1"
+  }
+}
