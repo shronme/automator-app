@@ -14,6 +14,7 @@ node_modules/
 # Build outputs
 dist/
 build/
+lib/
 
 # Environment files
 .env
@@ -43,6 +44,7 @@ Thumbs.db
 # Electron
 out/
 .webpack/
+release/
 
 # TypeScript
 *.tsbuildinfo
