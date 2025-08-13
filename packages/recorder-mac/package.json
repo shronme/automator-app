@@ -1,0 +1,35 @@
+{
+  "name": "@automator/recorder-mac",
+  "version": "0.1.0",
+  "description": "macOS Accessibility API recorder for desktop automation",
+  "type": "module",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "scripts": {
+    "build": "npm run build:native && npm run build:ts",
+    "build:native": "node-gyp rebuild",
+    "build:ts": "tsc",
+    "clean": "rm -rf lib build",
+    "test": "jest",
+    "sample": "ts-node src/sample.ts",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "node-addon-api": "^7.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0",
+    "jest": "^29.0.0",
+    "@types/jest": "^29.0.0",
+    "ts-jest": "^29.0.0",
+    "ts-node": "^10.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "os": [
+    "darwin"
+  ],
+  "gypfile": true
+}

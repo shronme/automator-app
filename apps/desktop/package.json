@@ -9,14 +9,17 @@
     "build:main": "tsc -p tsconfig.main.json",
     "build:preload": "tsc -p tsconfig.preload.json && cp dist/main/preload.js dist/main/preload.cjs",
     "build:renderer": "vite build",
-    "dev": "concurrently \"npm run dev:main\" \"npm run dev:renderer\" \"wait-on http://localhost:5173 && sleep 2 && electron dist/main/main.js\"",
+    "dev": "concurrently \"pnpm --filter desktop dev:main\" \"pnpm --filter desktop dev:renderer\" \"sleep 2 && electron dist/main/main.js\"",
     "dev:main": "concurrently \"tsc -p tsconfig.main.json --watch\" \"tsc -p tsconfig.preload.json --watch\" \"nodemon --watch dist/main/preload.js --exec 'cp dist/main/preload.js dist/main/preload.cjs'\"",
     "dev:renderer": "vite",
     "typecheck": "tsc --noEmit && tsc -p tsconfig.main.json --noEmit",
-    "test": "vitest"
+    "test": "vitest",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
   },
   "dependencies": {
     "@automator/common": "workspace:*",
+    "@automator/recorder-mac": "workspace:*",
     "electron-updater": "^6.1.4"
   },
   "devDependencies": {
@@ -26,12 +29,38 @@
     "@vitejs/plugin-react": "^4.1.0",
     "concurrently": "^8.2.1",
     "electron": "^37.2.6",
+    "electron-builder": "^24.13.3",
     "nodemon": "^3.1.10",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "typescript": "^5.2.2",
+    "typescript": "^5.9.2",
     "vite": "^4.4.9",
     "vitest": "^0.34.6",
     "wait-on": "^7.0.1"
+  },
+  "build": {
+    "appId": "com.automator.desktop",
+    "productName": "AI Desktop Automation",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "dist/**/*",
+      "node_modules/**/*"
+    ],
+    "mac": {
+      "category": "public.app-category.productivity",
+      "target": {
+        "target": "dmg",
+        "arch": [
+          "x64",
+          "arm64"
+        ]
+      },
+      "entitlements": "entitlements.mac.plist",
+      "entitlementsInherit": "entitlements.mac.plist",
+      "hardenedRuntime": true,
+      "gatekeeperAssess": false
+    }
   }
 }

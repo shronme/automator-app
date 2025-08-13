@@ -183,3 +183,196 @@ section h2 {
     grid-template-columns: 1fr;
   }
 }
+
+/* Onboarding Modal Styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(2px);
+}
+
+.modal-content {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  max-width: 600px;
+  max-height: 80vh;
+  overflow-y: auto;
+  animation: modalFadeIn 0.3s ease-out;
+}
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.onboarding-modal {
+  width: 90vw;
+  max-width: 550px;
+}
+
+.modal-header {
+  padding: 2rem 2rem 1rem;
+  text-align: center;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.modal-header h2 {
+  color: #2c3e50;
+  margin-bottom: 0.5rem;
+  font-size: 1.5rem;
+}
+
+.modal-header p {
+  color: #666;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.permissions-list {
+  padding: 1.5rem 2rem;
+}
+
+.permission-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  transition: all 0.3s ease;
+}
+
+.permission-item.required {
+  background-color: #fff5f5;
+  border: 1px solid #fed7d7;
+}
+
+.permission-item.granted {
+  background-color: #f0fff4;
+  border: 1px solid #9ae6b4;
+}
+
+.permission-info {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+.permission-icon {
+  font-size: 1.5rem;
+  margin-right: 1rem;
+  min-width: 2rem;
+  text-align: center;
+}
+
+.permission-details h3 {
+  margin: 0 0 0.25rem 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #2d3748;
+}
+
+.permission-details p {
+  margin: 0;
+  font-size: 0.875rem;
+  color: #718096;
+  line-height: 1.4;
+}
+
+.modal-instructions {
+  padding: 0 2rem 1.5rem;
+  background-color: #f7fafc;
+  border-top: 1px solid #e9ecef;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.modal-instructions h3 {
+  color: #2d3748;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.modal-instructions ol {
+  margin: 0;
+  padding-left: 1.25rem;
+  color: #4a5568;
+}
+
+.modal-instructions li {
+  margin-bottom: 0.5rem;
+  line-height: 1.5;
+  font-size: 0.875rem;
+}
+
+.modal-footer {
+  padding: 1.5rem 2rem 2rem;
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+}
+
+.btn-success {
+  background-color: #38a169;
+  color: white;
+}
+
+.btn-success:hover:not(:disabled) {
+  background-color: #2f855a;
+}
+
+@media (max-width: 640px) {
+  .onboarding-modal {
+    width: 95vw;
+    margin: 1rem;
+  }
+  
+  .modal-header,
+  .permissions-list,
+  .modal-instructions,
+  .modal-footer {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  .permission-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  
+  .permission-info {
+    width: 100%;
+  }
+  
+  .modal-footer {
+    flex-direction: column;
+  }
+}
+
+.permission-buttons {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 480px) {
+  .permission-buttons {
+    flex-direction: column;
+  }
+}

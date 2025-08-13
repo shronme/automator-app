@@ -1,9 +1,12 @@
 /// <reference types="vite/client" />
 
-import type { ElectronAPI } from '../main/preload';
-
 declare global {
   interface Window {
-    electronAPI: ElectronAPI;
+    electronAPI: {
+      invoke: (channel: string, data: unknown) => Promise<unknown>;
+      generateId: () => string;
+      platform: string;
+      isDevMode: boolean;
+    };
   }
 }
