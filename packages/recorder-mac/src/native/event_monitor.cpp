@@ -141,16 +141,12 @@ CGEventRef EventMonitor::keyEventCallback(CGEventTapProxy proxy, CGEventType typ
 }
 
 CGEventRef EventMonitor::handleMouseEvent(CGEventType type, CGEventRef event) {
-    std::cout << "Mouse event received: " << type << std::endl;
-    std::cout << "isRecording=" << isRecording << ", stepCallback=" << (stepCallback ? "YES" : "NO") << std::endl;
     
     if (!isRecording || !stepCallback) {
         std::cout << "EARLY RETURN: Not recording or no callback" << std::endl;
         return event;
     }
-    
-    std::cout << "Proceeding to process event type " << type << std::endl;
-    
+        
     CGPoint location = CGEventGetLocation(event);
     
     RecordedStep step;
@@ -198,7 +194,6 @@ CGEventRef EventMonitor::handleMouseEvent(CGEventType type, CGEventRef event) {
         case kCGEventLeftMouseUp:
         case kCGEventRightMouseUp:
             // We only record mouse down events as clicks
-            std::cout << "Ignoring mouse up event" << std::endl;
             return event;
         case kCGEventLeftMouseDragged:
         case kCGEventRightMouseDragged:
@@ -208,7 +203,6 @@ CGEventRef EventMonitor::handleMouseEvent(CGEventType type, CGEventRef event) {
             break;
         case kCGEventMouseMoved:
             // Skip regular mouse moves to avoid noise
-            std::cout << "Ignoring mouse move" << std::endl;
             return event;
         default:
             std::cout << "Ignoring unknown event type: " << type << std::endl;

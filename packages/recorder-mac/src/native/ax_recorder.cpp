@@ -82,8 +82,6 @@ Napi::Value AXRecorder::GetRecordedSteps(const Napi::CallbackInfo& info) {
     
     std::lock_guard<std::mutex> lock(stepsMutex);
     
-    std::cout << "GetRecordedSteps called, queue size: " << recordedSteps.size() << std::endl;
-    
     Napi::Array steps = Napi::Array::New(env, recordedSteps.size());
     size_t index = 0;
     
@@ -93,7 +91,6 @@ Napi::Value AXRecorder::GetRecordedSteps(const Napi::CallbackInfo& info) {
         tempQueue.pop();
     }
     
-    std::cout << "Returning " << index << " steps to JavaScript" << std::endl;
     return steps;
 }
 
